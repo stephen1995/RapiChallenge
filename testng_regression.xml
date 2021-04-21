@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="2">
+  <test  name="Docker Chrome Test">
+  <parameter name="browser" value="chrome"/>
+  
+  <classes>
+  <class name="GlueOrStepDefinitions.AgregarNuevoClienteOPropiedadStepDefinition"/>
+  </classes>
+  
+  </test>
+  
+  <test name="Dcoker FireFox Test">
+  <parameter name="browser" value="firefox"/>
+  
+  <classes>
+  <class name ="GlueOrStepDefinitions.AgregarNuevoClienteOPropiedadStepDefinition" />
+  </classes>
+  
+  
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

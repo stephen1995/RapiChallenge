@@ -1,55 +1,81 @@
-package GlueOrStepDefinitions;
-
+package stepDefinitions;
+import static org.hamcrest.CoreMatchers.containsString;
+import java.io.IOException;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-
-import BaseClass.BaseClass;
-import Pages.AccountPage;
-import Pages.CreateAnAccountPage;
-import Pages.HomePage;
-import Pages.SignInPage;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.CarnivalLanding_page;
+import pages.CruiseSearch_page;
+import utility.Actions;
 
-public class StepDefinitions extends BaseClass {
+public class LandingCarnival_steps {
 
-	public WebDriver driver;
+	CarnivalLanding_page home = new CarnivalLanding_page();
+	CruiseSearch_page page = new CruiseSearch_page();
 
-	@Given("The user has navigated to Automation Practice page and click on login")
-	public void the_user_has_navigated_to_Automation_Practice_page_and_click_on_login() {
-		BaseClass.Setup("http://automationpractice.com/index.php");
-
-		HomePage home = new HomePage();
-		home.signInlnk.click();
-	}
-
-	@And("The user enters an email and submit")
-	public void the_user_enters_an_email_and_submit() {
-		SignInPage signIn = new SignInPage();
-		signIn.CreateAnAccount();
-	}
-
-	@When("he fills all necessary data and submit")
-	public void he_fills_all_necessary_data_and_submit() {
-		CreateAnAccountPage create = new CreateAnAccountPage();
-		create.fillForm();
-	}
-
-
-	@Then("The user has successfully created an account")
-	public void the_user_has_successfully_created_an_account() {
-		
-		AccountPage page = new AccountPage();
-
-		Assert.assertTrue(page.signOut.isDisplayed());
 	
-		Assert.assertTrue(page.PageContains("?controller=my-account"));
-		
-		page.signOut.click();
-					
-		BaseClass.TearDown();
+	@Given("el usuario visita el landing de Carnival")
+	public void el_usuario_visita_el_landing_de_Carnival() {
 	}
+
+	@Given("hace click en Create Account")
+	public void hace_click_en_Create_Account() {
+		Actions.JsClick(home.closeWelcomeModal);
+		home.createAccountLnk.click();
+
+	}
+	@Given("se loguea con sus crendenciales")
+	public void se_loguea_con_sus_crendenciales() throws IOException {		
+		Actions.JsClick(home.closeWelcomeModal);
+		home.loginLnk.click();
+		home.fillLogIn();
+	
+	}
+
+	@Given("ingresa su Correo, Contraseña y da click en SignUp")
+	public void ingresa_su_Correo_Contraseña_y_da_click_en_SignUp() throws IOException {
+		home.fillCreateAccount();
+
+	}
+
+	@Given("ingresa la informacion del modal Complete Your Profile")
+	public void ingresa_la_informacion_del_modal_Complete_Your_Profile() {
+		home.fillCompleteYourProfile();
+	}
+	
+	@Then("el usuario puede observar un modal con las palabras {string}")
+	public void el_usuario_puede_observar_un_modal_con_las_palabras(String string) {
+		Actions.waitBeforeAction(home.notYetBtn);
+	    Assert.assertEquals(home.messageh1.getText(), string);
+	    home.notYetBtn.click();
+	    Actions.waitBeforeAction(home.logoutLnk);
+	}
+	
+	@Given("hace click en Sail To y selecciona Bahamas")
+	public void hace_click_en_Sail_To_y_selecciona_Bahamas() {
+	  Actions.JsClick(home.closeWelcomeModal);
+	  home.searchBahamas();
+	  
+	}
+
+	@Given("hace click en Duration y seleciona de seis a nueve dias")
+	public void hace_click_en_Duration_y_seleciona_de_seis_a_nueve_dias() {
+	    
+	}
+
+	@When("hace click en Search Cruises y es redirigido a la pagina {string}")
+	public void hace_click_en_Search_Cruises_es_redirigido_a_la_pagina_Cruise_search(String string) {
+	 
+		Assert.assertThat(Hooks_steps.driver.getCurrentUrl(), containsString(string));
+	}
+	
+	@Given("hace click en el link saved y es redirigido a la pagina {string}")
+	public void hace_click_en_el_link_saved_y_es_redirigido_a_la_pagina(String string) {
+		Actions.waitBeforeAction(home.logoutLnk);
+	    home.savedLnk.click();
+	}
+
+
 
 }
