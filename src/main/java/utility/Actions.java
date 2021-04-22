@@ -17,13 +17,6 @@ public class Actions extends Hooks_steps {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 	}
 
-	public static void SwtichToFrame(WebElement element) {
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(element));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-	}
-
 	public static void waitBeforeAction(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element));
