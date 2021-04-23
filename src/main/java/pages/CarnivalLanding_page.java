@@ -116,16 +116,17 @@ public class CarnivalLanding_page extends Hooks_steps {
 
 	public void searchBahamas() {
 		sailToBtn.click();
+		Actions.waitBeforeAction(theBahamasBtn);
 		theBahamasBtn.click();
 		durationBtn.click();
+		Actions.waitBeforeAction(sixToNineDaysBtn);
 		sixToNineDaysBtn.click();
 		searchCruisesBtn.click();
 	}
 
 	public void fillLogIn() throws IOException {
 		Actions.waitBeforeAction(emailTxt);
-		// emailTxt.sendKeys(randomEmail() + "@gmail.com");
-		emailTxt.sendKeys("20042021225929@gmail.com");
+		emailTxt.sendKeys(randomEmail() + "@gmail.com");
 		property = PropertiesReader.Reader();
 		passwordTxt.sendKeys(property.getProperty("password"));
 		logInBtn.click();
@@ -152,7 +153,7 @@ public class CarnivalLanding_page extends Hooks_steps {
 		cityAreaTxt.sendKeys("01");
 		localNumberTxt.sendKeys("986194484");
 		Actions.JsClick(iAcceptTermsAndConditionsChbox);
-		submitBtn.click();
+		Actions.JsClick(submitBtn);
 	}
 
 	public String randomEmail() {

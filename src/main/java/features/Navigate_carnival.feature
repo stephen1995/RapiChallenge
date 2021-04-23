@@ -21,7 +21,28 @@ Feature: Navegar en la pagina de Carnival
 	Scenario: Continuar desde mi busqueda guardada y realizar cambios
 			Given el usuario visita el landing de Carnival		
 			And hace click en el link saved y es redirigido a la pagina "/saved"
-			And selecciona el itinerario guardado
+			And selecciona el itinerario guardado y es redirigido a la pagina "/itinerary"
+			And el usuario hace click en Review Trip y es redirigido a la pagina "/booking"
+			And hace click en continuar
+			When hace click en el link Change para modificar la cantidad de asientos
+			And aumenta a cuatro el numero de huespedes
+			And hace click en continuar
+			And selecciona Mexico como su pais de residencia
+			And selecciona la opcion, Mostrar tarifas para VIFP Club
+			And hace click en continuar
+			And selecciona la habitacion mas barata
+			And selecciona el interior incluido en el precio
+			And selecciona continuar para la opcion Let me choose my room
+			And hace click en mas opciones
+			And selecciona la opcion April Savings Sale
+			And selecciona su cuarto
+			And hace click en continuar
+			Then hace click en continuar en booking y es llevado a la pagina de "/payment"
+			
+			
+			
+			
+			
 			
 
 

@@ -55,7 +55,6 @@ public class LandingCarnival_steps {
 
 	@Given("hace click en Sail To y selecciona Bahamas")
 	public void hace_click_en_Sail_To_y_selecciona_Bahamas() {
-		Actions.JsClick(home.closeWelcomeModal);
 		home.searchBahamas();
 
 	}
@@ -73,8 +72,9 @@ public class LandingCarnival_steps {
 
 	@Given("hace click en el link saved y es redirigido a la pagina {string}")
 	public void hace_click_en_el_link_saved_y_es_redirigido_a_la_pagina(String string) {
-		Actions.JsClick(home.closeWelcomeModal);
+		Actions.waitBeforeAction(home.savedLnk);
 		home.savedLnk.click();
+			
 	}
 
 }

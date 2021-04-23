@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import cucumber.api.java.After;
+import cucumber.api.java.AfterStep;
 import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utility.PropertiesReader;
@@ -43,21 +47,24 @@ public class Hooks_steps {
 		}
 		default: {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+
+			ChromeOptions option = new ChromeOptions();
+			option.setExperimentalOption("debuggerAddress", "localhost:9898");
+			driver = new ChromeDriver(option);
 		}
 		}
 
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-
+		
+		//driver.manage().deleteAllCookies();
 		driver.get(property.getProperty("home"));
 
 	}
 
 	@After
 	public void TearDown() throws InterruptedException {
-
-		driver.close();
+		
+		//driver.close();
 
 	}
 

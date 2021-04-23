@@ -13,6 +13,11 @@ public class Itinerary_page extends Hooks_steps {
 
 	@FindBy(id = "sm-logo")
 	public WebElement logoImg;
+	
+	@FindBy(xpath = "//span[text()='Review Trip']")
+	public WebElement reviewTripBtn;
+	
+	
 
 	public Itinerary_page() {
 		PageFactory.initElements(driver, this);
