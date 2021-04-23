@@ -10,7 +10,7 @@ import cucumber.api.junit.Cucumber;
 					tags="@SmokeTest",
 					monochrome = true,
 					dryRun = false,
-					plugin = {"pretty","html:target/Report"},
+					plugin = {"json:target/cucumber.json"},
 					strict = false					
 					)
 
